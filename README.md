@@ -11,7 +11,7 @@ You will practice:
 
 We are going to be using [BreatheCode Todo's API](https://assets.breatheco.de/apis/fake/todos/) to upload and download the TODO's, please refer to the HTTP and REST lessons as a quick background research for the project.
 
-- Get todos by calling: `[GET] /todos/user/<username>`   
+- Get todo's by calling: `[GET] /todos/user/<username>`   
 - Initilize the todo list: `[POST] /todos/user/<username>`  
 - Update your todo list: `[PUT] /todos/user/<username>`  
 
@@ -49,10 +49,10 @@ $ python src/test.py
 ## 📝 Instructions
 
 - You app needs to work from the the command line [like this](https://github.com/breatheco-de/todo-list-cli-with-cloud/blob/master/preview.gif).
-- The user should be able to add new tasks.
-- The user can add as many tasks as it wants.
+- The user should be able to add a new tasks.
+- The user can add as many tasks as they want.
 - The user can delete tasks by specifying the task position in the list.
-- The app must be able to save to todos to the cloud using [BreatheCode Todo's API](https://assets.breatheco.de/apis/fake/todos/)
+- The app must be able to save to todo's to the cloud using [BreatheCode Todo's API](https://assets.breatheco.de/apis/fake/todos/)
 - The app must be able to download (load) the todo's from the [BreatheCode Todo's API](https://assets.breatheco.de/apis/fake/todos/)
 
 
