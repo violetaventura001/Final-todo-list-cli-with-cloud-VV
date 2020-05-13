@@ -6,8 +6,11 @@ def get_todos():
     return todos
 
 def add_one_task(title):
-    # your code here
-    pass
+    global todos
+    r = requests.get('https://assets.breatheco.de/apis/fake/todos/user/violetaventura001') 
+    todos.append(title)
+    r = requests.post(url = 'https://assets.breatheco.de/apis/fake/todos/user/violetaventura001', data = [])
+    print(todos)  
 
 def print_list():
     r = requests.get('https://assets.breatheco.de/apis/fake/todos/user/violetaventura001') 
