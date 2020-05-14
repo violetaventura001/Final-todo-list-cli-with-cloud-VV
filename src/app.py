@@ -1,4 +1,4 @@
-import json, requests, csv
+import json, requests
 
 todos = []
 
@@ -6,11 +6,11 @@ def get_todos():
     return todos
 
 def add_one_task(title):
-    global todos
-    r = requests.get('https://assets.breatheco.de/apis/fake/todos/user/violetaventura001') 
-    todos.append(title)
-    r = requests.post(url = 'https://assets.breatheco.de/apis/fake/todos/user/violetaventura001', data = [])
-    print(todos)  
+    r = requests.put(url = "https://assets.breatheco.de/apis/fake/todos/user/violetaventura001", 
+                 json = [{'label': title, 'done': 'True'}], 
+                 headers = {'content-type':'application/json'})
+    #todos.append(title)
+    print(todos)
 
 def print_list():
     r = requests.get('https://assets.breatheco.de/apis/fake/todos/user/violetaventura001') 
@@ -19,9 +19,7 @@ def print_list():
 
 def delete_task(number_to_delete):
     global todos
-    r = requests.get('https://assets.breatheco.de/apis/fake/todos/user/violetaventura001') 
     todos.pop(int(number_to_delete))
-    d = requests.put('https://assets.breatheco.de/apis/fake/todos/user/violetaventura001', data = [])
     print(todos) 
 
 def initialize_todos():
@@ -36,9 +34,13 @@ def initialize_todos():
         print("A todo list was found, loading the todos...")
         todos = r.json()
     
-def save_todos(listToUpdate):
-    # your code here
-    pass
+def save_todos():
+    global todos
+    r = requests.post('https://assets.breatheco.de/apis/fake/todos/user/violetaventura001', json = json.dumps(todos)) 
+    print(r.json)
+    if r.status_code == 200:
+        print("You have saved to the todos.")
+    else: r.text
 
 def load_todos():
     # your code here
@@ -74,7 +76,7 @@ if __name__ == '__main__':
             add_one_task(title)
         elif response == "4":
             print("Saving todo's...")
-            save_todos(todos)
+            save_todos()
         elif response == "5":
             print("Loading todo's...")
             load_todos()
