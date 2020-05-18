@@ -5,21 +5,16 @@ todos = []
 def get_todos():
     return todos
 
-def add_one_task(title):
-    r = requests.put(url = "https://assets.breatheco.de/apis/fake/todos/user/violetaventura001", 
-                 json = [{'label': title, 'done': 'True'}], 
-                 headers = {'content-type':'application/json'})
-    #todos.append(title)
+def add_one_task(title):#this is for your local 
+    todos.append({'label': title, 'done': False})
     print(todos)
 
 def print_list():
-    r = requests.get('https://assets.breatheco.de/apis/fake/todos/user/violetaventura001') 
-    r = r.json()
-    print(r)
+    print(todos)
 
 def delete_task(number_to_delete):
     global todos
-    todos.pop(int(number_to_delete))
+    todos.pop(int(number_to_delete)-1)
     print(todos) 
 
 def initialize_todos():
@@ -33,18 +28,26 @@ def initialize_todos():
     else:
         print("A todo list was found, loading the todos...")
         todos = r.json()
+        print(todos)
     
 def save_todos():
     global todos
-    r = requests.post('https://assets.breatheco.de/apis/fake/todos/user/violetaventura001', json = json.dumps(todos)) 
-    print(r.json)
+    print(todos)
+    r = requests.put('https://assets.breatheco.de/apis/fake/todos/user/violetaventura001', json= todos) 
+    print(r.json())
     if r.status_code == 200:
         print("You have saved to the todos.")
     else: r.text
 
-def load_todos():
-    # your code here
-    pass
+def load_todos():#we want to get the saved todos from the cloud
+    global todos
+    print(todos)
+    response = requests.get('https://assets.breatheco.de/apis/fake/todos/user/violetaventura001') 
+    print(response.json())
+    if response.status_code == 200:
+        todos = response.json() #this will be the new list todos retrived from the API into my my local todos variable 
+        print("You have printed the todos from the cloud.")
+    else: response.text
     
 # Below this code will only run if the entry file running was app.py
 if __name__ == '__main__':
